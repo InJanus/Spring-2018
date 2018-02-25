@@ -39,9 +39,9 @@ int main() {
     node N1;
     
     // Enter source voltage
-    double in_voltage;
+    double source_voltage;
     cout << "Enter Source Voltage: ";
-    cin >> in_voltage;
+    cin >> source_voltage;
     
     // Enter basic Node Information
     N1.name = nodeName();
@@ -53,20 +53,20 @@ int main() {
     double series_current = source_voltage/ total_resistance;
 
     // Calculate voltage across the restistor 
-    N1.voltage_across = series_current* N1.resistance;
+    N1.voltage_across = series_current * N1.resistance;
     // Calculate the power across the resistor
-    N1.power_across = calcPower(N1.voltage_across, series_current);
+    N1.power_across = N1.voltage_across * series_current;
 
     // Display Network Information
     cout << "Series Network: " << endl;
-    cout << "Source Voltage: " << sourceVoltage << "-Volts" << endl;
+    cout << "Source Voltage: " << source_voltage << "-Volts" << endl;
     cout << "Total Resistance: " << total_resistance << "-Ohms" << endl;
     cout << "Series Current: " << series_current << "-Amperes" << endl;
     // Display Node information
-    cout << "Node Name: " << node1.name << endl;
-    cout << "Node Voltage: " << node1.voltage_across << "-Volts" << endl;
-    cout << "Node Resistance: " << node1.resistance << "-Ohms" << endl;
-    cout << "Node Power: " << node1.power_across << "-Watts" << endl;
+    cout << "Node Name: " << N1.name << endl;
+    cout << "Node Voltage: " << N1.voltage_across << "-Volts" << endl;
+    cout << "Node Resistance: " << N1.resistance << "-Ohms" << endl;
+    cout << "Node Power: " << N1.power_across << "-Watts" << endl;
 
     return 0;
 }
