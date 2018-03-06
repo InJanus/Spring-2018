@@ -144,18 +144,16 @@ void editResis(){
         }
         cout << "\nSelect Resistor to edit (Type \"Quit\" to exit): ";
         cin >> select;
-        
-        
         if((select == "Quit")||(select == "quit")){
             flag = 1;
         } else {
             for(int i = 0; i < globalmynodes.size(); i++){
-                if(select == globalmynodes.at(i).name){
+                if((i == globalmynodes.size()-1)&&(globalmynodes.at(i).name != select)){     
+                    cout << "Invalid Selection: Please choose another" << endl;
+                } else if(select == globalmynodes.at(i).name){
                     globalmynodes.at(i).name = getName();
                     globalmynodes.at(i).resistance = getResis();
                     break;
-                } else if((i == globalmynodes.size()-1)&&(globalmynodes.at(i).name != select)){
-                    cout << "Invalid Selection: Please choose another" << endl;
                 }
             }
         }
@@ -173,6 +171,7 @@ void deleteResis(){
     if(globalmynodes.size() > 1){
         string select = "";
         int flag = 0;
+        int myflag = 0;
         int count = 0;
         vector<node> temp(globalmynodes.size());
         do{
@@ -180,41 +179,38 @@ void deleteResis(){
             flag = 0;
             count = 0;
             //cout << "Here!";
-            vector<node> temp(globalmynodes.size()-1);
-            //cout << temp.size();
+            int mysize = (globalmynodes.size()-1);
+            if(mysize == -1){
+                mysize = 0;
+            }
+            vector<node> temp(mysize);
             cout << endl;
             for(int i = 0; i < globalmynodes.size();i++){
                 cout << "Name: " << globalmynodes.at(i).name << endl << "Resistance: " << globalmynodes.at(i).resistance << endl;
             }
             cout << "\nSelect Resistor to delete (Type \"Quit\" to exit): ";
             cin >> select;
-            //cout << temp.size() << endl;
-            //cout << globalmynodes.at(0).name << endl;
             if((select == "Quit")||(select == "quit")){
                 flag = 1;
             }else {
-                if(temp.size() == 0){
-                    globalmynodes = temp;
-                    flag = 1;
-                } else {
+                if(temp.size() != 0){
                     for(int i = 0; i < globalmynodes.size(); i++){
-                        if(select != globalmynodes.at(i).name){
+                        if((i == count)&&(i == globalmynodes.size()-1)&&(globalmynodes.at(i).name != select)){    //
+                            cout << "Invalid Selection: Please choose another" << endl;
+                            myflag = 1;
+                        } else if(select != globalmynodes.at(i).name){
                             temp.at(count) = globalmynodes.at(i);
                             count++;
-                        } else if((i == globalmynodes.size()-1)&&(globalmynodes.at(i).name != select)){
-                            cout << "Invalid Selection: Please choose another" << endl;
                         }
                     }
+                }
+                if(myflag == 0){
                     globalmynodes = temp;
                 }
             }
+            myflag = 0;
         }while(flag != 1);
     }
-    
-    //for(int i = 0; i < globalmynodes.size();i++){
-        //cout << globalmynodes.at(i).name << endl;
-        //cout << globalmynodes.at(i).resistance << endl;
-    //}
 }
 
 void menu(){
@@ -285,4 +281,3 @@ int main() {
     
     return 0;
 }
-
