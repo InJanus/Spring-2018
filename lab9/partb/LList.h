@@ -69,7 +69,7 @@ public:
 
 
    bool empty() const {
-        // TODO: Fill me in
+        cout << head << endl;
     }
 
     unsigned int size() const {
@@ -146,6 +146,13 @@ public:
         head = NULL;
     }
 
+    int getAt(unsigned int temp){
+        //i could not find the function for this so i made it myself
+        
+
+
+    }
+
 private:
     node_t* head;
 
@@ -153,7 +160,7 @@ private:
 
 // Note this function is O(n^2) because getAt is O(n) and we are
 // doing it n times.
-
+/*
 ostream& operator<<(ostream& out, const LList other){
     out << "[";
     for(unsigned int i = 1; i < other.size(); i++){
@@ -165,5 +172,6 @@ ostream& operator<<(ostream& out, const LList other){
     out << "]";
     return out;
 }
+*/
 
 #endif

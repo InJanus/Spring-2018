@@ -70,7 +70,7 @@ int main() {
   cout << "maninp10:" << endl;
   cout << j[5].getC() << "\t== " << 199 << endl;
   delete[] j;
-
+  
   return 0;
 }
 

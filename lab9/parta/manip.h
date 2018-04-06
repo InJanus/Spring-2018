@@ -1,7 +1,7 @@
 #ifndef MANIP_H
 #define MANIP_H
 
-// Author: Fill in your name
+// Author: Brian Culberson
 // Source File: manip.h
 // Description: A set of functions where you should manipulate
 // the passed parameters to change the object in a specific way, 
@@ -15,39 +15,45 @@ void manip1(Pointers* p){
 }
 
 void manip2(Pointers* p){
-  // TODO: Fill me in
+  *(p->getB()) = 45;
 }
 
 void manip3(Pointers* p){
-  // TODO: Fill me in
+  *(p->getB()) = *(p->getA());
 }
 
 void manip4(Pointers* p, int* other){
-  // TODO: Fill me in
+  p->setB(other);
 }
 
 void manip5(Pointers* p, int* other){
-  // TODO: Fill me in
+  int temp = (*other + 41);
+  p->setB(&temp);
+  p->setC();
 }
 
 void manip6(Pointers* p){
-  // TODO: Fill me in
+  *((p->getB())+2) = 10;
 }
 
 void manip7(Pointers* p){
-  // TODO: Fill me in
+  *(p->getB()) = 15;
 }
 
 void manip8(Pointers* p){
-  // TODO: Fill me in
+  int temp = 199;
+  p->setB(&temp);
+  p->setC();
 }
 
 void manip9(Pointers* p, int* other){
-  // TODO: Fill me in
+  p->setB(other);
 }
 
 void manip10(Pointers* p){
-  // TODO: Fill me in
+  int temp = 199;
+  (p+5)->setB(&temp);   //you need the p+5 to access the indiviual part of the array
+  (p+5)->setC();
 }
 
 #endif

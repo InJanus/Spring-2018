@@ -1,5 +1,5 @@
 /*
-    Fill me in
+    Brian Culberson 2018
 */
 
 #include <iostream>
@@ -15,6 +15,8 @@ int main(){
         a.push_front(45);
     }
 
+    cin.get();
     return 0;
+
 }
 
