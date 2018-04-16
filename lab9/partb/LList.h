@@ -19,6 +19,8 @@ struct node_t {
     node_t* next;
 };
 
+typedef struct node_t* node_tPtr;
+
 // This implementation will use a head pointer,
 // allowing O(1) insertion on the front,
 // and O(n) on the end.
@@ -42,7 +44,7 @@ public:
         }
         // Not empty?  Iterate through the other list
         // and push_back on myself.
-        node_t* temp = other.head;
+        node_tPtr temp = other.head;
         while(temp){
             push_back(temp->data);
             temp = temp->next;
@@ -59,7 +61,7 @@ public:
         if(other.head == NULL){
             return *this;
         }
-        node_t* temp = other.head;
+        node_tPtr temp = other.head;
         while(temp){
             push_back(temp->data);
             temp = temp->next;
@@ -69,15 +71,35 @@ public:
 
 
    bool empty() const {
-        cout << head << endl;
+        return (head == NULL);
     }
 
     unsigned int size() const {
-        // TODO: Fill me in
+        node_tPtr temp = head;
+        int count = 0;
+        while(temp!=NULL){
+            temp = temp->next;
+            count++;
+        }
+        return count;
     }
 
     void push_back(int value){
-        // TODO: Fill me in
+        node_tPtr curr = head;
+        node_tPtr n = new node_t;
+        n->next = NULL;
+        n->data = value;
+
+        if(head != NULL){   // in list is empty
+            while(curr->next != NULL){  //finds the end of the list by going through each one
+                curr = curr->next;
+            }
+            curr->next = n; //when curr does equal NULL then set n to equal curr->next
+        }else{
+            head = n;
+        }
+
+        
     }
 
     void push_front(int value){
@@ -87,7 +109,7 @@ public:
             head->data = value;
             head->next = NULL;
         }else{ // Not empty
-            node_t* temp = new node_t;
+            node_tPtr temp = new node_t;
             temp->data = value;
             temp->next = head;
             head = temp;
@@ -96,20 +118,30 @@ public:
 
     void pop_front(){
         if(head == NULL) return;
-        node_t* temp = head;
+        node_tPtr temp = head;
         head = head->next;
         delete temp;
     }
 
     void pop_back(){
-        // TODO: Fill me in
+        if(head == NULL) return;
+        node_tPtr curr = head;
+        while(curr->next != NULL){
+            curr = curr->next;
+            if(curr->next->next == NULL){
+                break;
+            }
+        }
+        curr->next = NULL;  //done
+        
+        
     }
 
 
     // Overload [] operator
     // Return logic error if index out of bounds
     int& operator[](unsigned pos){
-        node_t* temp = head;
+        node_tPtr temp = head;
         while(temp != NULL && pos > 0){
             temp = temp->next;
             pos--;
@@ -122,11 +154,52 @@ public:
     }
 
     LList reverse() const {
-        // TODO: Fill me in
-        return LList(); // Remove me!
+        LList temp;
+        node_tPtr curr = head;
+
+
+        for(int i = 0; i < size(); i++){
+            //cout << curr->data << endl;
+            temp.push_front(curr->data);
+            curr = curr->next;
+        }
+
+        return temp;
     }
 
     bool operator==(const LList& other) const {
+        
+        node_tPtr curr = head;
+        
+        if(size() == other.size()){
+            for(unsigned int i = 0; i < other.size();i++){
+                //if((curr->data) == other.getAt(i)){
+                    cout << other.getAt(i) << endl;
+                    curr = curr->next;
+               // }else{
+                    //return false;
+                //}
+            }
+            return true;
+        }
+        return false;
+
+
+
+
+
+        /*
+        
+        if(size() == other.size()){
+            for(int i = 0; i < size(); i++){
+                if(getAt(i) != other.getAt(i)){
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+        */
     }
 
     bool operator!=(const LList& other) const {
@@ -134,7 +207,7 @@ public:
     }
 
     void clear(){
-        node_t* last = head;
+        node_tPtr last = head;
         while(head){
             head = head->next;
             delete last;
@@ -148,13 +221,35 @@ public:
 
     int getAt(unsigned int temp){
         //i could not find the function for this so i made it myself
-        
+        //start counting at 0
+        node_tPtr tempPtr = head;
+        int count = temp;
 
+
+        while(count > 0){
+            tempPtr = tempPtr->next;
+            count--;
+        }
+
+        return (tempPtr->data);
+    }
+
+    void setAt(unsigned int temp, int value){
+        node_tPtr tempPtr = head;
+        int count = temp;
+
+        while(count > 0){
+            tempPtr = tempPtr->next;
+            count--;
+        }
+        tempPtr->data = value;
 
     }
 
 private:
-    node_t* head;
+    node_tPtr head;
+    
+    //so for this, you make a constant list connected by pointers
 
 };
 

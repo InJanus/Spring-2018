@@ -10,12 +10,23 @@
 using namespace std;
 
 int main(){
-    LList a;
-    for(int i = 0; i < 50; i++){
-        a.push_front(45);
-    }
 
-    cin.get();
+    LList test;
+
+    for(int i = 0; i < 10; i++){
+        test.push_back(i);
+    }
+    test.pop_back();   //this deletes the front node
+    test.setAt(5,1000);
+    test = test.reverse();
+    test == test;
+    for(int i = 0; i < test.size(); i++){
+        
+        cout << i << " - "<<  test.getAt(i) << endl;
+    }
+    //cout << test.size() << endl;
+
+
     return 0;
 
 }
